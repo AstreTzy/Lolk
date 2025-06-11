@@ -49,16 +49,19 @@
       <canvas id="waveform" width="200" height="40"></canvas>
     </div>
     
-    <audio id="audio" src="Lola.mp3"></audio>    
-    <div class="scroll-indicator">
-        </div>
-    <div class="scroll-indicator">
-        <p>Desliza</p>
-        <div class="arrow"></div>
-        <div class="arrow"></div>
-        <div class="arrow"></div>
-    </div>
-  </section> <!-- Cierre agregado -->
+    <audio id="audio" src="Lola.mp3"></audio>   
+ 
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  </section> <!-- Cierre agrega</section> 
 
   <section class="agradecer">
     <!-- Partículas de luz -->
@@ -71,39 +74,83 @@
     <h2>&</h2>
     <h1>lalo</h1>
     <h2>Nos complace invitarte a ser parte de este gran día.</h2>
-    <div class="scroll-indicator">
-        <p>Desliza</p>
-        <div class="arrow"></div>
-        <div class="arrow"></div>
-        <div class="arrow"></div>
-    </div>
-  </section>
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    </section> <!-- Cierre agrega</section>
 <!-- Partículas de luz -->
   <section class="cuenta">
-    <h1>Mi gran día:</h1>
-    <h1>14 De Junio</h1>
-    <h1>2025</h1>
-    <h3>ESTO FALTA PARA MI DÍA SOÑADO</h3>
-    <div id="contador">
-      <div class="tiempo">
-        <span id="dias">00</span>
-        <p>Días</p>
-      </div>
-      <div class="tiempo">
-        <span id="horas">00</span>
-        <p>Horas</p>
-      </div>
-      <div class="tiempo">
-        <span id="minutos">00</span>
-        <p>Minutos</p>
-      </div>
-      <div class="tiempo">
-        <span id="segundos">00</span>
-        <p>Segundos</p>
-      </div>
-    </div>    
-  </section>
+  <h1>Mi gran día:</h1>
+  <h1>21 De Junio</h1>
+  <h1>2025</h1>
+  <h3>ESTO FALTA PARA MI DÍA SOÑADO</h3>
+  <div id="contador">
+    <div class="tiempo">
+      <span id="dias">00</span>
+      <p>Días</p>
+    </div>
+    <div class="tiempo">
+      <span id="horas">00</span>
+      <p>Horas</p>
+    </div>
+    <div class="tiempo">
+      <span id="minutos">00</span>
+      <p>Minutos</p>
+    </div>
+    <div class="tiempo">
+      <span id="segundos">00</span>
+      <p>Segundos</p>
+    </div>
+  </div>
+</section>
 
+<script>
+  // Fecha y hora objetivo: 21 de junio de 2025 a las 4:00 PM
+  const fechaObjetivo = new Date("2025-06-21T16:00:00").getTime();
+
+  function actualizarContador() {
+    const ahora = new Date().getTime();
+    const diferencia = fechaObjetivo - ahora;
+
+    if (diferencia <= 0) {
+      document.getElementById("dias").textContent = "00";
+      document.getElementById("horas").textContent = "00";
+      document.getElementById("minutos").textContent = "00";
+      document.getElementById("segundos").textContent = "00";
+      return;
+    }
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+    document.getElementById("dias").textContent = dias.toString().padStart(2, '0');
+    document.getElementById("horas").textContent = horas.toString().padStart(2, '0');
+    document.getElementById("minutos").textContent = minutos.toString().padStart(2, '0');
+    document.getElementById("segundos").textContent = segundos.toString().padStart(2, '0');
+  }
+
+  // Ejecutar inmediatamente y actualizar cada segundo
+  actualizarContador();
+  setInterval(actualizarContador, 1000);
+</script>
   <section class="lugar">
     <!-- Partículas de luz -->
     <div class="destello" style="top:10%; left:20%; animation-delay: 0s;"></div>
