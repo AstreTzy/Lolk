@@ -63,7 +63,7 @@
     <h2>&</h2>
     <h1>lalo</h1>
     <h2>Nos complace invitarte a ser parte de este gran día.</h2>
-  </section>
+  </section> <!-- Cierre agregado -->
 
   <!-
   <section class="cuenta">
@@ -109,7 +109,7 @@
 
     const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
     const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+     const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
     document.getElementById("dias").textContent = dias.toString().padStart(2, '0');
