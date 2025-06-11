@@ -68,8 +68,7 @@
   <!-
   <section class="cuenta">
   <h1>Mi gran día:</h1>
-  <h1>21 De Junio</h1>
-  <h1>2025</h1>
+  <h2>21 de Junio de 2025</h2>
   <h3>ESTO FALTA PARA MI DÍA SOÑADO</h3>
   <div id="contador">
     <div class="tiempo">
@@ -89,39 +88,7 @@
       <p>Segundos</p>
     </div>
   </div>
-</section>
-
-<script>
-  // Fecha y hora objetivo: 21 de junio de 2025 a las 4:00 PM
-  const fechaObjetivo = new Date("2025-06-21T16:00:00").getTime();
-
-  function actualizarContador() {
-    const ahora = new Date().getTime();
-    const diferencia = fechaObjetivo - ahora;
-
-    if (diferencia <= 0) {
-      document.getElementById("dias").textContent = "00";
-      document.getElementById("horas").textContent = "00";
-      document.getElementById("minutos").textContent = "00";
-      document.getElementById("segundos").textContent = "00";
-      return;
-    }
-
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-     const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-    document.getElementById("dias").textContent = dias.toString().padStart(2, '0');
-    document.getElementById("horas").textContent = horas.toString().padStart(2, '0');
-    document.getElementById("minutos").textContent = minutos.toString().padStart(2, '0');
-    document.getElementById("segundos").textContent = segundos.toString().padStart(2, '0');
-  }
-
-  // Ejecutar inmediatamente y actualizar cada segundo
-  actualizarContador();
-  setInterval(actualizarContador, 1000);
-</script>
+  </section>
   -->
 
   <section class="lugar">
