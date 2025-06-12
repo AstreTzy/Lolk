@@ -814,4 +814,37 @@ section {
   z-index: 1;
 }
 
+.cuenta {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff7e6;
+  border-radius: 2rem;
+  margin: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
 
+#contador {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.tiempo {
+  background-color: #ffe0b2;
+  padding: 1rem;
+  border-radius: 1rem;
+  min-width: 70px;
+}
+
+.tiempo span {
+  display: block;
+  font-size: 2rem;
+  color: #b88a20;
+}
+
+.tiempo p {
+  margin: 0;
+  font-weight: bold;
+  color: #444;
+}
