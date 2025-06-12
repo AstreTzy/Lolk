@@ -121,3 +121,39 @@ formulario.addEventListener('submit', function(e) {
     console.error('Error:', error);
   });
 });
+<script>
+  const diasEl = document.getElementById("dias");
+  const horasEl = document.getElementById("horas");
+  const minutosEl = document.getElementById("minutos");
+  const segundosEl = document.getElementById("segundos");
+
+  // Fecha objetivo: 21 de junio 2025 a las 6:00 PM hora local
+  const fechaEvento = new Date("June 21, 2025 18:00:00").getTime();
+
+  function actualizarContador() {
+    const ahora = new Date().getTime();
+    const diferencia = fechaEvento - ahora;
+
+    if (diferencia <= 0) {
+      diasEl.innerText = "00";
+      horasEl.innerText = "00";
+      minutosEl.innerText = "00";
+      segundosEl.innerText = "00";
+      return;
+    }
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+    diasEl.innerText = dias.toString().padStart(2, '0');
+    horasEl.innerText = horas.toString().padStart(2, '0');
+    minutosEl.innerText = minutos.toString().padStart(2, '0');
+    segundosEl.innerText = segundos.toString().padStart(2, '0');
+  }
+
+  // Actualizar cada segundo
+  actualizarContador();
+  setInterval(actualizarContador, 1000);
+</script>
