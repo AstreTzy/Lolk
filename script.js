@@ -1,4 +1,4 @@
-/* script.js */
+// script.js
 
 // Animación al hacer scroll
 const animar = document.querySelectorAll('.animar');
@@ -16,10 +16,10 @@ const mostrarAnimado = () => {
 // Detectar cuando una sección entra en vista
 const sections = document.querySelectorAll('section');
 const options = {
-  threshold: 0.5, // Activar cuando al menos el 50% de la sección esté en vista
+  threshold: 0.5,
 };
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('animar-zoom');
@@ -29,11 +29,14 @@ const observer = new IntersectionObserver((entries, observer) => {
   });
 }, options);
 
-// Observar todas las secciones
 sections.forEach(section => {
   observer.observe(section);
 });
 
+window.addEventListener('scroll', mostrarAnimado);
+window.addEventListener('load', mostrarAnimado);
+
+// Reproductor de audio con visualizador
 const audio = document.getElementById('audio');
 const playButton = document.getElementById('play-button');
 const playIcon = document.getElementById('play-icon');
@@ -63,7 +66,6 @@ function drawWave() {
   const barGap = 3;
   const numBars = Math.floor(width / (barWidth + barGap));
   const progress = audio.currentTime / audio.duration;
-
   const now = Date.now() / 200;
 
   for (let i = 0; i < numBars; i++) {
@@ -82,15 +84,12 @@ function drawWave() {
   }
 }
 
-window.addEventListener('scroll', mostrarAnimado);
-window.addEventListener('load', mostrarAnimado);
-
-/* Confirmación de asistencia */
+// Confirmación de asistencia
 const formulario = document.getElementById('formulario');
 
-formulario.addEventListener('submit', function(e) {
+formulario.addEventListener('submit', function (e) {
   e.preventDefault();
-  
+
   const nombre = document.getElementById('nombre').value.trim();
 
   if (nombre === "") {
@@ -105,55 +104,56 @@ formulario.addEventListener('submit', function(e) {
     },
     body: `tipo=asistencia&nombre=${encodeURIComponent(nombre)}`
   })
-  .then(response => response.text())
-  .then(data => {
-    if (data === "ok") {
-      alert("¡Gracias por confirmar tu asistencia!");
-      formulario.reset();
-    } else if (data === "repetido") {
-      alert("Ese nombre ya está registrado. 😅");
-    } else {
-      alert("Ocurrió un error. Por favor intenta de nuevo.");
-    }
-  })
-  .catch(error => {
-    alert("Error de conexión.");
-    console.error('Error:', error);
-  });
+    .then(response => response.text())
+    .then(data => {
+      if (data === "ok") {
+        alert("¡Gracias por confirmar tu asistencia!");
+        formulario.reset();
+      } else if (data === "repetido") {
+        alert("Ese nombre ya está registrado. 😅");
+      } else {
+        alert("Ocurrió un error. Por favor intenta de nuevo.");
+      }
+    })
+    .catch(error => {
+      alert("Error de conexión.");
+      console.error('Error:', error);
+    });
 });
-<script>
-  const diasEl = document.getElementById("dias");
-  const horasEl = document.getElementById("horas");
-  const minutosEl = document.getElementById("minutos");
-  const segundosEl = document.getElementById("segundos");
 
-  // Fecha objetivo: 21 de junio 2025 a las 6:00 PM hora local
-  const fechaEvento = new Date("June 21, 2025 18:00:00").getTime();
+// ---------------------
+// CONTADOR REGRESIVO
+// ---------------------
+const diasEl = document.getElementById("dias");
+const horasEl = document.getElementById("horas");
+const minutosEl = document.getElementById("minutos");
+const segundosEl = document.getElementById("segundos");
 
-  function actualizarContador() {
-    const ahora = new Date().getTime();
-    const diferencia = fechaEvento - ahora;
+// Fecha objetivo: 21 de junio 2025 a las 6:00 PM
+const fechaEvento = new Date("June 21, 2025 18:00:00").getTime();
 
-    if (diferencia <= 0) {
-      diasEl.innerText = "00";
-      horasEl.innerText = "00";
-      minutosEl.innerText = "00";
-      segundosEl.innerText = "00";
-      return;
-    }
+function actualizarContador() {
+  const ahora = new Date().getTime();
+  const diferencia = fechaEvento - ahora;
 
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-    diasEl.innerText = dias.toString().padStart(2, '0');
-    horasEl.innerText = horas.toString().padStart(2, '0');
-    minutosEl.innerText = minutos.toString().padStart(2, '0');
-    segundosEl.innerText = segundos.toString().padStart(2, '0');
+  if (diferencia <= 0) {
+    diasEl.innerText = "00";
+    horasEl.innerText = "00";
+    minutosEl.innerText = "00";
+    segundosEl.innerText = "00";
+    return;
   }
 
-  // Actualizar cada segundo
-  actualizarContador();
-  setInterval(actualizarContador, 1000);
-</script>
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+  diasEl.innerText = dias.toString().padStart(2, '0');
+  horasEl.innerText = horas.toString().padStart(2, '0');
+  minutosEl.innerText = minutos.toString().padStart(2, '0');
+  segundosEl.innerText = segundos.toString().padStart(2, '0');
+}
+
+actualizarContador();
+setInterval(actualizarContador, 1000);
