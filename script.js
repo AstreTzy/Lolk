@@ -202,33 +202,14 @@ actualizarContador(); // Llamada inicial
       // Renderizar lista en el DOM
       function renderizarLista(canciones) {
   lista.innerHTML = '';
-  canciones.forEach((cancion, index) => {
+  canciones.forEach(cancion => {
     const li = document.createElement('li');
     const embed = crearEmbed(cancion);
-
     if (embed) {
       li.innerHTML = `<strong>${cancion}</strong><br>${embed}`;
     } else {
       li.textContent = cancion;
     }
-
-    const btnEliminar = document.createElement('button');
-    btnEliminar.textContent = 'Eliminar';
-    btnEliminar.style.marginLeft = '10px';
-    btnEliminar.addEventListener('click', () => {
-      canciones.splice(index, 1); // Quita la canción
-      guardarPlaylist(canciones); // Guarda los cambios
-      renderizarLista(canciones); // Refresca la lista
-
-      // Mensaje de eliminación
-      mensaje.textContent = '❌ Canción eliminada de la playlist.';
-      mensaje.style.color = 'orange';
-      setTimeout(() => {
-        mensaje.textContent = '';
-      }, 3000);
-    });
-
-    li.appendChild(btnEliminar);
     lista.appendChild(li);
   });
       }
