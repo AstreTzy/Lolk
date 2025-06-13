@@ -138,17 +138,15 @@
 </section>
   
   <section class="playlist">
-    <h1>¿Me ayudas con la playlist?</h1>
-    <h3>Agrega aquí tu canción favorita y que no puede faltar.</h3>
-  
-    <form id="formPlaylist">
-      <input type="text" id="cancion" placeholder="Nombre o link de la canción" required>
-      <button type="submit">
-        Agregar Canción
-      </button>
-    </form>
-    
-    <div id="mensajePlaylist"></div>
+  <h1>¿Me ayudas con la playlist?</h1>
+  <h3>Agrega aquí tu canción favorita y que no puede faltar.</h3>
+  <form id="formPlaylist">
+    <input type="text" id="cancion" placeholder="Nombre o link de la canción" required>
+    <button type="submit">Agregar Canción</button>
+  </form>
+  <button id="togglePlaylist">Mostrar Playlist</button>
+  <div id="mensajePlaylist" style="margin: 10px 0; min-height: 20px;"></div>
+  <ul id="listaCanciones" style="list-style: none; padding: 0; display: none;"></ul>
   </section>
     
   <section class="agradecimientos">
