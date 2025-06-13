@@ -98,7 +98,7 @@ formulario.addEventListener('submit', function(e) {
     return;
   }
 
-  fetch('https://script.google.com/macros/s/AKfycbz5K_rdSY8RA2MPTA2X1sZioLFqgChD30ON3oH_ytpXGF4kPSNr8FuJxF2CGSIf58g/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbzQjGTqKvUVFdwdsf06v3dOmHFA8g5xHoW3fB6f5cEF7zVN3NFZiUMb7M8qoyAqSom8SQ/exec', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -121,3 +121,38 @@ formulario.addEventListener('submit', function(e) {
     console.error('Error:', error);
   });
 });
+
+  const mensaje = "Gracias por acompañarme en este momento tan especial. Tu cariño y apoyo son el mejor regalo que puedo recibir. Si deseas contribuir con un sobre, lo recibiré con mucho amor y gratitud. 💖✨";
+
+  window.addEventListener("load", () => {
+    const mensajeDiv = document.getElementById("mensajeElegante");
+    mensajeDiv.textContent = mensaje;
+    mensajeDiv.classList.add("visible");
+  });
+function actualizarContador() {
+  const fechaEvento = new Date("2025-06-21T20:00:00"); // Fecha del evento
+  const ahora = new Date();
+  const diferencia = fechaEvento - ahora;
+
+  if (diferencia <= 0) {
+    document.getElementById("dias").textContent = "00";
+    document.getElementById("horas").textContent = "00";
+    document.getElementById("minutos").textContent = "00";
+    document.getElementById("segundos").textContent = "00";
+    return;
+  }
+
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+  document.getElementById("dias").textContent = String(dias).padStart(2, '0');
+  document.getElementById("horas").textContent = String(horas).padStart(2, '0');
+  document.getElementById("minutos").textContent = String(minutos).padStart(2, '0');
+  document.getElementById("segundos").textContent = String(segundos).padStart(2, '0');
+}
+
+// Actualizar cada segundo
+setInterval(actualizarContador, 1000);
+actualizarContador(); // Llamada inicial
