@@ -98,7 +98,7 @@ formulario.addEventListener('submit', function(e) {
     return;
   }
 
-  fetch('https://script.google.com/macros/s/AKfycbzQjGTqKvUVFdwdsf06v3dOmHFA8g5xHoW3fB6f5cEF7zVN3NFZiUMb7M8qoyAqSom8SQ/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbwFTU9JFmeANXV79tBGYjVVXzDguxpcegjRUJZ8x6yn6kTfpxys76HYr7VGOnUrg_Rh/exec', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
