@@ -156,3 +156,108 @@ function actualizarContador() {
 // Actualizar cada segundo
 setInterval(actualizarContador, 1000);
 actualizarContador(); // Llamada inicial
+
+//
+(() => {
+      const form = document.getElementById('formPlaylist');
+      const input = document.getElementById('cancion');
+      const lista = document.getElementById('listaCanciones');
+      const mensaje = document.getElementById('mensajePlaylist');
+      const toggleBtn = document.getElementById('togglePlaylist');
+      const STORAGE_KEY = 'miPlaylistCanciones';
+
+      // Cargar canciones guardadas
+      function cargarPlaylist() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (!data) return [];
+
+        try {
+          return JSON.parse(data);
+        } catch {
+          return [];
+        }
+      }
+
+      // Guardar canciones
+      function guardarPlaylist(canciones) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(canciones));
+      }
+
+      // Crear embed si es link válido
+      function crearEmbed(link) {
+        const ytMatch = link.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^\s&]+)/);
+        if (ytMatch) {
+          const videoId = ytMatch[1];
+          return `<iframe width="320" height="180" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+        }
+        const spMatch = link.match(/open\.spotify\.com\/(track|album|playlist)\/([a-zA-Z0-9]+)/);
+        if (spMatch) {
+          const type = spMatch[1];
+          const id = spMatch[2];
+          return `<iframe src="https://open.spotify.com/embed/${type}/${id}" width="320" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+        }
+        return null;
+      }
+
+      // Renderizar lista en el DOM
+      function renderizarLista(canciones) {
+        lista.innerHTML = '';
+        canciones.forEach(cancion => {
+          const li = document.createElement('li');
+          const embed = crearEmbed(cancion);
+          if (embed) {
+            li.innerHTML = `<strong>${cancion}</strong><br>${embed}`;
+          } else {
+            li.textContent = cancion;
+          }
+          lista.appendChild(li);
+        });
+      }
+
+      // Estado inicial
+      let canciones = cargarPlaylist();
+      if (canciones.length) {
+        renderizarLista(canciones);
+        lista.style.display = 'block';
+        toggleBtn.textContent = 'Ocultar Playlist';
+      } else {
+        lista.style.display = 'none';
+        toggleBtn.textContent = 'Mostrar Playlist';
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        if (lista.style.display === 'none' || lista.style.display === '') {
+          lista.style.display = 'block';
+          toggleBtn.textContent = 'Ocultar Playlist';
+        } else {
+          lista.style.display = 'none';
+          toggleBtn.textContent = 'Mostrar Playlist';
+        }
+      });
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const valor = input.value.trim();
+        if (!valor) {
+          mensaje.textContent = 'Por favor, ingresa el nombre o link de la canción.';
+          mensaje.style.color = 'red';
+          return;
+        }
+
+        // Agregar canción a lista y guardar
+        canciones.push(valor);
+        guardarPlaylist(canciones);
+        renderizarLista(canciones);
+
+        mensaje.textContent = '🎵 Canción agregada a la playlist.';
+        mensaje.style.color = 'green';
+
+        input.value = '';
+        lista.style.display = 'block';
+        toggleBtn.textContent = 'Ocultar Playlist';
+
+        setTimeout(() => {
+          mensaje.textContent = '';
+        }, 3000);
+      });
+    })();
